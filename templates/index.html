@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>p爬虫控制页面</title>
+    <script src="{% static 'jquery-1.12.3.js' %}"></script>
+    <style>
+        #box
+        {
+            border: 1px deepskyblue solid;
+        }
+        #title
+        {
+            color: deepskyblue;
+
+        }
+        #swich
+        {
+
+        }
+        #returnMsg
+        {
+            border: red 1px solid;
+            height: 100px;
+            color: red;
+        }
+        #tips
+        {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <h1 id="title">爬虫控制</h1>
+    <p><input type="button" value="开始爬取" id="swich"><span style="color: red">为防多点，点一次就不能再点</span></p>
+    <p id="tips">提示：爬取完成后会在下面通知显示，爬取过程报错,具体报错信息,也会在下面显示,具体原因请联系爬虫作者</p>
+    <div id="returnMsg">
+
+    </div>
+</div>
+
+
+<script>
+    $('#swich').click(function () {
+        $('#swich').attr('disabled','disabled')
+        $.ajax({
+            url:'/start/',
+            type:'get',
+            success:function (recv) {
+                $('#returnMsg').html(recv.returnMessage)
+            }
+        
+        })
+    })
+</script>
+
+</body>
+</html>
